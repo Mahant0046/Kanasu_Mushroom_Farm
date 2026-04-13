@@ -201,7 +201,11 @@ const Blog = () => {
               >
                 <div className="card overflow-hidden">
                   <div className="aspect-video bg-earth-100 flex items-center justify-center text-6xl">
-                    📝
+                    <img 
+                          src={blog.featuredImage} 
+                          alt={blog.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
                   </div>
                   <div className="p-6">
                     <span className="text-xs font-medium text-forest-600 bg-forest-50 px-3 py-1 rounded-full uppercase">

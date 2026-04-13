@@ -100,8 +100,8 @@ const orderSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Generate order number before saving
-orderSchema.pre('save', async function(next) {
+// Generate order number before validation
+orderSchema.pre('validate', async function(next) {
   if (!this.orderNumber) {
     const count = await mongoose.model('Order').countDocuments();
     this.orderNumber = `KAN${String(count + 1).padStart(6, '0')}`;

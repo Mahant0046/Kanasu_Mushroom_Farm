@@ -21,27 +21,34 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
+    <nav className="bg-white shadow-md sticky top-0 z-50 border-b border-earth-100">
       <div className="container">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <Leaf className="h-8 w-8 text-forest-600" />
-            <span className="text-xl font-display font-semibold text-earth-900">
-              Kanasu
-            </span>
+          <Link to="/" className="flex items-center space-x-3 group">
+            <div className="bg-forest-600 text-white p-2 rounded-lg group-hover:bg-forest-700 transition-colors">
+              <Leaf className="h-6 w-6" />
+            </div>
+            <div>
+              <span className="text-2xl font-display font-bold text-earth-900 block leading-tight">
+                Kanasu
+              </span>
+              <span className="text-xs text-earth-500 font-medium tracking-wide uppercase">
+                Mushroom Farm
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
                   isActive(link.path)
-                    ? 'text-forest-600'
-                    : 'text-earth-600 hover:text-forest-600'
+                    ? 'bg-forest-100 text-forest-700'
+                    : 'text-earth-600 hover:bg-earth-50 hover:text-forest-600'
                 }`}
               >
                 {link.name}
@@ -50,14 +57,14 @@ const Navbar = () => {
           </div>
 
           {/* Right side icons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative p-2 text-earth-600 hover:text-forest-600 transition-colors"
+              className="relative p-3 text-earth-600 hover:text-forest-600 hover:bg-earth-50 rounded-lg transition-colors"
             >
-              <ShoppingBag className="h-6 w-6" />
+              <ShoppingBag className="h-5 w-5" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-forest-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-forest-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
@@ -66,14 +73,14 @@ const Navbar = () => {
             {isAuthenticated ? (
               <Link
                 to="/profile"
-                className="p-2 text-earth-600 hover:text-forest-600 transition-colors"
+                className="p-3 text-earth-600 hover:text-forest-600 hover:bg-earth-50 rounded-lg transition-colors"
               >
-                <User className="h-6 w-6" />
+                <User className="h-5 w-5" />
               </Link>
             ) : (
               <Link
                 to="/login"
-                className="btn-primary text-sm py-2 px-4"
+                className="btn-primary text-sm py-2.5 px-5 font-semibold"
               >
                 Login
               </Link>
@@ -83,7 +90,7 @@ const Navbar = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-earth-600"
+            className="lg:hidden p-3 text-earth-600 hover:bg-earth-50 rounded-lg transition-colors"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -91,33 +98,33 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t border-earth-100">
-            <div className="flex flex-col space-y-4">
+          <div className="lg:hidden py-6 border-t border-earth-100 bg-earth-50 -mx-4 px-4">
+            <div className="flex flex-col space-y-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`text-sm font-medium ${
+                  className={`px-4 py-3 rounded-lg text-sm font-semibold ${
                     isActive(link.path)
-                      ? 'text-forest-600'
-                      : 'text-earth-600'
+                      ? 'bg-forest-600 text-white'
+                      : 'text-earth-700 hover:bg-white'
                   }`}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="flex items-center space-x-4 pt-4 border-t border-earth-100">
+              <div className="flex items-center space-x-3 pt-4 border-t border-earth-200">
                 <button
                   onClick={() => {
                     setIsCartOpen(true);
                     setIsOpen(false);
                   }}
-                  className="relative p-2 text-earth-600"
+                  className="relative p-3 bg-white rounded-lg text-earth-600 shadow-sm"
                 >
-                  <ShoppingBag className="h-6 w-6" />
+                  <ShoppingBag className="h-5 w-5" />
                   {cartCount > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-forest-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    <span className="absolute -top-1 -right-1 bg-forest-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                       {cartCount}
                     </span>
                   )}
@@ -127,16 +134,16 @@ const Navbar = () => {
                   <Link
                     to="/profile"
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center space-x-2 text-earth-600"
+                    className="flex items-center space-x-2 px-4 py-3 bg-white rounded-lg text-earth-700 shadow-sm"
                   >
-                    <User className="h-6 w-6" />
-                    <span className="text-sm">Profile</span>
+                    <User className="h-5 w-5" />
+                    <span className="text-sm font-semibold">Profile</span>
                   </Link>
                 ) : (
                   <Link
                     to="/login"
                     onClick={() => setIsOpen(false)}
-                    className="btn-primary text-sm py-2 px-4 text-center"
+                    className="btn-primary text-sm py-3 px-5 font-semibold"
                   >
                     Login
                   </Link>

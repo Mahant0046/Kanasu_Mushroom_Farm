@@ -8,6 +8,24 @@ exports.createOrder = async (req, res, next) => {
   try {
     const { items, shippingAddress, paymentMethod, notes, isSubscription, subscriptionId } = req.body;
 
+    // Validate shipping address
+    if (!shippingAddress) {
+      return res.status(400).json({
+        success: false,
+        message: 'Shipping address is required'
+      });
+    }
+
+    const requiredAddressFields = ['name', 'phone', 'street', 'city', 'state', 'zipCode'];
+    for (const field of requiredAddressFields) {
+      if (!shippingAddress[field] || shippingAddress[field].trim() === '') {
+        return res.status(400).json({
+          success: false,
+          message: `Shipping address ${field} is required`
+        });
+      }
+    }
+
     // Validate items
     if (!items || items.length === 0) {
       return res.status(400).json({

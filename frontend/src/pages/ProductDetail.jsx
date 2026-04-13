@@ -60,34 +60,34 @@ const ProductDetail = () => {
     <div className="py-8">
       <div className="container">
         {/* Breadcrumb */}
-        <nav className="text-sm text-earth-600 mb-8">
+        <nav className="text-sm text-earth-600 mb-8 flex items-center">
           <Link to="/" className="hover:text-forest-600">Home</Link>
-          <span className="mx-2">/</span>
+          <span className="mx-2 text-earth-400">/</span>
           <Link to="/shop" className="hover:text-forest-600">Shop</Link>
-          <span className="mx-2">/</span>
-          <span className="text-earth-900">{product.name}</span>
+          <span className="mx-2 text-earth-400">/</span>
+          <span className="text-earth-900 font-medium">{product.name}</span>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Product Images */}
           <div>
-            <div className="aspect-square bg-earth-50 rounded-2xl overflow-hidden mb-4">
+            <div className="aspect-square bg-white rounded-2xl overflow-hidden mb-4 shadow-sm border border-earth-100">
               {product.thumbnail ? (
                 <img
                   src={product.thumbnail}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-9xl">
+                <div className="w-full h-full flex items-center justify-center text-9xl bg-earth-50">
                   🍄
                 </div>
               )}
             </div>
             {product.images && product.images.length > 1 && (
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-4 gap-3">
                 {product.images.map((image, index) => (
-                  <div key={index} className="aspect-square bg-earth-50 rounded-lg overflow-hidden">
+                  <div key={index} className="aspect-square bg-white rounded-lg overflow-hidden shadow-sm border border-earth-100 cursor-pointer hover:shadow-md transition-shadow">
                     <img
                       src={image}
                       alt={`${product.name} ${index + 1}`}
@@ -101,20 +101,20 @@ const ProductDetail = () => {
 
           {/* Product Info */}
           <div>
-            <div className="flex items-center space-x-2 mb-2">
-              <span className="text-xs font-medium text-forest-600 bg-forest-50 px-3 py-1 rounded-full capitalize">
+            <div className="flex items-center space-x-2 mb-4">
+              <span className="text-xs font-semibold text-forest-600 bg-forest-100 px-3 py-1.5 rounded-full uppercase tracking-wide">
                 {product.mushroomType}
               </span>
-              <span className="text-xs font-medium text-earth-600 bg-earth-100 px-3 py-1 rounded-full capitalize">
+              <span className="text-xs font-semibold text-earth-600 bg-earth-100 px-3 py-1.5 rounded-full uppercase tracking-wide">
                 {product.productType.replace('-', ' ')}
               </span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-display font-semibold text-earth-900 mb-4">
+            <h1 className="text-3xl md:text-4xl font-display font-bold text-earth-900 mb-4 leading-tight">
               {product.name}
             </h1>
 
-            <div className="flex items-center space-x-2 mb-4">
+            <div className="flex items-center space-x-3 mb-6">
               <div className="flex items-center">
                 {[...Array(5)].map((_, i) => (
                   <Star
@@ -127,54 +127,54 @@ const ProductDetail = () => {
                   />
                 ))}
               </div>
-              <span className="text-earth-600">
+              <span className="text-earth-600 font-medium">
                 {product.rating.average} ({product.rating.count} reviews)
               </span>
             </div>
 
-            <div className="mb-6">
-              <p className="text-3xl font-bold text-earth-900">
+            <div className="mb-6 pb-6 border-b border-earth-200">
+              <p className="text-4xl font-bold text-earth-900">
                 ₹{product.price}
               </p>
               {product.weight && (
-                <p className="text-earth-600">
+                <p className="text-earth-600 mt-1">
                   per {product.weight.value}{product.weight.unit}
                 </p>
               )}
             </div>
 
-            <p className="text-earth-600 mb-6">
+            <p className="text-earth-700 mb-8 leading-relaxed">
               {product.description}
             </p>
 
             {product.stock <= product.lowStockThreshold && product.stock > 0 && (
-              <div className="bg-orange-50 border border-orange-200 text-orange-700 px-4 py-2 rounded-lg mb-6">
+              <div className="bg-orange-50 border border-orange-200 text-orange-800 px-4 py-3 rounded-lg mb-6 font-medium">
                 Only {product.stock} items left in stock!
               </div>
             )}
 
             {product.stock === 0 && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-lg mb-6">
+              <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg mb-6 font-medium">
                 Out of Stock
               </div>
             )}
 
             {/* Quantity Selector */}
-            <div className="flex items-center space-x-4 mb-6">
-              <div className="flex items-center border border-earth-200 rounded-lg">
+            <div className="flex items-center space-x-4 mb-8">
+              <div className="flex items-center border-2 border-earth-200 rounded-xl overflow-hidden">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="p-3 hover:bg-earth-50 transition-colors"
+                  className="p-4 hover:bg-earth-50 transition-colors"
                 >
                   <Minus className="h-5 w-5" />
                 </button>
-                <span className="w-16 text-center font-semibold">
+                <span className="w-20 text-center font-semibold text-lg">
                   {quantity}
                 </span>
                 <button
                   onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
                   disabled={product.stock === 0}
-                  className="p-3 hover:bg-earth-50 transition-colors disabled:opacity-50"
+                  className="p-4 hover:bg-earth-50 transition-colors disabled:opacity-50"
                 >
                   <Plus className="h-5 w-5" />
                 </button>
@@ -182,7 +182,7 @@ const ProductDetail = () => {
               <button
                 onClick={handleAddToCart}
                 disabled={product.stock === 0}
-                className="flex-1 btn-primary flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 btn-primary flex items-center justify-center py-4 text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <ShoppingCart className="h-5 w-5 mr-2" />
                 Add to Cart
@@ -191,11 +191,11 @@ const ProductDetail = () => {
 
             {/* Product Features */}
             <div className="grid grid-cols-3 gap-4 mb-8">
-              <div className="text-center p-4 bg-earth-50 rounded-lg">
+              <div className="text-center p-4 bg-forest-50 rounded-xl">
                 <Truck className="h-6 w-6 text-forest-600 mx-auto mb-2" />
-                <p className="text-xs text-earth-600">Fast Delivery</p>
+                <p className="text-xs font-semibold text-earth-900">Fast Delivery</p>
               </div>
-              <div className="text-center p-4 bg-earth-50 rounded-lg">
+              <div className="text-center p-4 bg-forest-50 rounded-xl">
                 <Shield className="h-6 w-6 text-forest-600 mx-auto mb-2" />
                 <p className="text-xs text-earth-600">Quality Assured</p>
               </div>

@@ -19,8 +19,10 @@ router.route('/')
 router.route('/featured')
   .get(getFeaturedProducts);
 
+router.route('/:slug')
+  .get(getProduct);
+
 router.route('/:id')
-  .get(getProduct)
   .put(protect, authorize('admin'), uploadMultiple('images', 5), updateProduct)
   .delete(protect, authorize('admin'), deleteProduct);
 
