@@ -29,7 +29,7 @@ const AdminLogin = () => {
       // Check if user is admin after login
       const token = localStorage.getItem('token');
       if (token) {
-        const userResponse = await fetch('http://localhost:5000/api/auth/me', {
+        const userResponse = await fetch(`${import.meta.env.VITE_API_URL || 'https://kanasu-mushroom-farm.onrender.com/api'}/auth/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const userData = await userResponse.json();
