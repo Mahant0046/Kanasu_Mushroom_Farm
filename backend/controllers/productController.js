@@ -11,7 +11,11 @@ exports.getProducts = async (req, res, next) => {
     const skip = (page - 1) * limit;
 
     // Build query
-    const query = { isActive: true };
+    const query = {};
+    // Only filter by isActive if not requesting all products (admin view)
+    if (!req.query.includeInactive) {
+      query.isActive = true;
+    }
 
     // Filter by category
     if (req.query.category) {
@@ -89,9 +93,20 @@ exports.getProducts = async (req, res, next) => {
 // @access  Public
 exports.getProduct = async (req, res, next) => {
   try {
-    const product = await Product.findOne({ slug: req.params.slug, isActive: true })
-      .populate('category', 'name slug')
-      .populate('reviews');
+    const slug = req.params.slug;
+    const id = req.params.id;
+    let product;
+
+    // Check if request is by ID (admin) or slug (public)
+    if (id) {
+      product = await Product.findById(id)
+        .populate('category', 'name slug')
+        .populate('reviews');
+    } else if (slug) {
+      product = await Product.findOne({ slug: slug, isActive: true })
+        .populate('category', 'name slug')
+        .populate('reviews');
+    }
 
     if (!product) {
       return res.status(404).json({

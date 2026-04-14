@@ -19,12 +19,19 @@ const contactRoutes = require('./routes/contact');
 const app = express();
 
 // Security middleware
-app.use(helmet());
+
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
+
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://kanasu-mushroom-farm.vercel.app'
-  ],credentials: true
+    /\.vercel\.app$/  // This allows ANY URL ending in .vercel.app
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Rate limiting

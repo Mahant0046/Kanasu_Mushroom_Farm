@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom'
 import { CartProvider } from './context/CartContext'
 import { AuthProvider } from './context/AuthContext'
 import Navbar from './components/Navbar'
@@ -16,34 +16,72 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
 import AdminDashboard from './pages/AdminDashboard'
+import AdminReviews from './pages/AdminReviews'
+import AdminSubscriptions from './pages/AdminSubscriptions'
+import FarmDashboard from './pages/FarmDashboard'
+import AdminLogin from './pages/AdminLogin'
+import AdminHome from './pages/AdminHome'
+import AdminProducts from './pages/AdminProducts'
+import AdminOrders from './pages/AdminOrders'
+import AdminOrderDetail from './pages/AdminOrderDetail'
+import AdminReviewDetail from './pages/AdminReviewDetail'
+import AdminProductDetail from './pages/AdminProductDetail'
+import AdminSubscriptionDetail from './pages/AdminSubscriptionDetail'
+import ProductForm from './components/admin/ProductForm'
+import AdminLayout from './components/admin/AdminLayout'
 
 function App() {
   return (
     <AuthProvider>
       <CartProvider>
         <Router>
-          <div className="min-h-screen flex flex-col">
-            <Navbar />
-            <main className="flex-grow">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/shop/:slug" element={<ProductDetail />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:slug" element={<Blog />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/admin" element={<AdminDashboard />} />
-              </Routes>
-            </main>
-            <Footer />
-            <CartSidebar />
-          </div>
+          <Routes>
+            {/* Admin Routes - No Navbar/Footer */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/*" element={<AdminLayout />}>
+              <Route index element={<AdminHome />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="products" element={<AdminProducts />} />
+              <Route path="products/new" element={<ProductForm />} />
+              <Route path="products/:id/edit" element={<ProductForm />} />
+              <Route path="products/:id" element={<AdminProductDetail />} />
+              <Route path="orders" element={<AdminOrders />} />
+              <Route path="orders/:id" element={<AdminOrderDetail />} />
+              <Route path="reviews" element={<AdminReviews />} />
+              <Route path="reviews/:id" element={<AdminReviewDetail />} />
+              <Route path="subscriptions" element={<AdminSubscriptions />} />
+              <Route path="subscriptions/:id" element={<AdminSubscriptionDetail />} />
+              <Route path="farm" element={<FarmDashboard />} />
+            </Route>
+
+            {/* Regular Routes - With Navbar/Footer */}
+            <Route
+              element={
+                <>
+                  <Navbar />
+                  <main className="flex-grow">
+                    <Outlet />
+                  </main>
+                  <Footer />
+                  <CartSidebar />
+                </>
+              }
+            >
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/shop/:category" element={<Shop />} />
+              <Route path="/product/:slug" element={<ProductDetail />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<Blog />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/profile" element={<Profile />} />
+            </Route>
+          </Routes>
         </Router>
       </CartProvider>
     </AuthProvider>
