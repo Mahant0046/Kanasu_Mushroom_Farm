@@ -290,6 +290,16 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Admin Login Link */}
+      <div className="py-4 bg-earth-900 text-center">
+        <Link
+          to="/admin/login"
+          className="text-earth-400 hover:text-white text-sm transition-colors"
+        >
+          Admin Login
+        </Link>
+      </div>
     </div>
   );
 };
