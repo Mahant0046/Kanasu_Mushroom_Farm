@@ -18,6 +18,10 @@ const contactRoutes = require('./routes/contact');
 
 const app = express();
 
+
+// Add this line here
+app.set('trust proxy', 1); 
+
 // Security middleware
 
 app.use(helmet({
