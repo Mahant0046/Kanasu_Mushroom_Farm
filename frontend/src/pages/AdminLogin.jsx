@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Leaf, Lock, Mail, AlertCircle, Loader2, ArrowLeft, Shield } from 'lucide-react';
+import { Lock, Mail, AlertCircle, Loader2, ArrowLeft, Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const AdminLogin = () => {
@@ -69,8 +69,12 @@ const AdminLogin = () => {
 
         {/* Logo Section */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center bg-forest-600 p-4 rounded-2xl mb-4 shadow-lg shadow-forest-600/30">
-            <Leaf className="h-12 w-12 text-white" />
+          <div className="inline-flex items-center justify-center bg-forest-600 p-6 rounded-2xl mb-4 shadow-lg shadow-forest-600/30">
+            <img 
+              src="/logo.png" 
+              alt="Kanasu Mushroom Farm" 
+              className="h-16 w-16 object-contain" 
+            />
           </div>
           <h1 className="text-4xl font-display font-bold text-earth-900 mb-2">
             Kanasu Farm Admin

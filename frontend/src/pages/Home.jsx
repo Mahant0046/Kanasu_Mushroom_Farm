@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Leaf, Truck, Shield, Heart, Star } from 'lucide-react';
+import { ArrowRight, Truck, Shield, Heart, Star, Leaf } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import { productsAPI, blogAPI } from '../services/api';
 
@@ -265,6 +265,140 @@ const Home = () => {
           </div>
         </section>
       )}
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gradient-to-b from-white to-forest-50">
+        <div className="container">
+          <div className="text-center mb-16">
+            <span className="text-forest-600 font-semibold text-sm uppercase tracking-wide mb-2 block">Testimonials</span>
+            <h2 className="text-4xl font-display font-bold text-earth-900 mb-4">What Our Customers Say</h2>
+            <p className="text-earth-600 max-w-2xl mx-auto">Real stories from our happy mushroom lovers</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            {/* Testimonial 1 */}
+            <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-1">
+              <div className="absolute -top-4 left-8 bg-forest-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                ⭐⭐⭐⭐⭐
+              </div>
+              <div className="mt-4 mb-6">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <p className="text-earth-700 leading-relaxed italic">
+                  "The freshness of Kanasu mushrooms is unmatched! I've been ordering for 6 months now and every single delivery has been perfect. Their button mushrooms are the best I've ever had."
+                </p>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-forest-400 to-forest-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">
+                  PM
+                </div>
+                <div>
+                  <h4 className="font-semibold text-earth-900">Priya Menon</h4>
+                  <p className="text-sm text-earth-500">Home Chef, Bangalore</p>
+                </div>
+              </div>
+              <div className="absolute bottom-4 right-4 text-6xl text-forest-100 opacity-50 group-hover:opacity-100 transition-opacity">
+                "
+              </div>
+            </div>
+
+            {/* Testimonial 2 - Featured Center Card with Accordion Design */}
+            <div className="relative bg-gradient-to-br from-forest-600 via-forest-700 to-earth-700 text-white rounded-2xl p-8 shadow-2xl transform -translate-y-4 md:-translate-y-8 transition-all duration-500 hover:-translate-y-6 md:hover:-translate-y-12">
+              {/* Decorative border */}
+              <div className="absolute inset-0 rounded-2xl border-2 border-forest-400/30"></div>
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-white/5 to-transparent"></div>
+              
+              <div className="relative">
+                {/* Accordion-style header */}
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-forest-700 px-6 py-2 rounded-full text-sm font-bold shadow-xl flex items-center gap-2">
+                  <span className="text-amber-500">★</span>
+                  Featured Review
+                  <span className="text-amber-500">★</span>
+                </div>
+                
+                <div className="mt-6 mb-6">
+                  <div className="flex gap-1 mb-4 justify-center">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-6 w-6 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <p className="text-forest-100 leading-relaxed italic text-lg">
+                    "As a restaurant owner, quality is everything. Kanasu Mushroom Farm has been our trusted supplier for 2 years. Their shiitake mushrooms are consistently excellent and our customers love the dishes we make with them."
+                  </p>
+                </div>
+                
+                <div className="flex items-center gap-4 justify-center">
+                  <div className="w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-xl ring-4 ring-amber-400/30">
+                    RK
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-white text-lg">Rajesh Kumar</h4>
+                    <p className="text-sm text-forest-200">Restaurant Owner, Chennai</p>
+                  </div>
+                </div>
+                
+                <div className="absolute bottom-4 right-4 text-7xl text-white opacity-20">
+                  "
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial 3 */}
+            <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-1">
+              <div className="absolute -top-4 left-8 bg-forest-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                ⭐⭐⭐⭐⭐
+              </div>
+              <div className="mt-4 mb-6">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <p className="text-earth-700 leading-relaxed italic">
+                  "I discovered Kanasu during the lockdown and haven't looked back since! Their milky mushrooms are perfect for my curry recipes. The subscription service is so convenient and the prices are very reasonable."
+                </p>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-forest-400 to-forest-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">
+                  AS
+                </div>
+                <div>
+                  <h4 className="font-semibold text-earth-900">Anita Sharma</h4>
+                  <p className="text-sm text-earth-500">Food Blogger, Mumbai</p>
+                </div>
+              </div>
+              <div className="absolute bottom-4 right-4 text-6xl text-forest-100 opacity-50 group-hover:opacity-100 transition-opacity">
+                "
+              </div>
+            </div>
+          </div>
+
+          {/* Stats Bar */}
+          <div className="mt-16 bg-white rounded-2xl shadow-lg p-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div>
+                <div className="text-4xl font-bold text-forest-600 mb-2">5000+</div>
+                <div className="text-earth-600 text-sm">Happy Customers</div>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-forest-600 mb-2">4.9/5</div>
+                <div className="text-earth-600 text-sm">Average Rating</div>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-forest-600 mb-2">98%</div>
+                <div className="text-earth-600 text-sm">Satisfaction Rate</div>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-forest-600 mb-2">5+ Years</div>
+                <div className="text-earth-600 text-sm">Serving Excellence</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-forest-600 via-forest-700 to-earth-700 text-white relative overflow-hidden">

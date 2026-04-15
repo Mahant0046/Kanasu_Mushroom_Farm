@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User, ShoppingBag, LogOut, MapPin, Phone, Mail, Package } from 'lucide-react';
+import { User, ShoppingBag, LogOut, MapPin, Phone, Mail, Package, RefreshCw } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { ordersAPI } from '../services/api';
+import { ordersAPI, subscriptionsAPI } from '../services/api';
 
 const Profile = () => {
   const { user, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
+  const [subscriptions, setSubscriptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('orders');
 
@@ -17,17 +18,21 @@ const Profile = () => {
       return;
     }
 
-    const fetchOrders = async () => {
+    const fetchData = async () => {
       try {
-        const res = await ordersAPI.getMyOrders();
-        setOrders(res.data.orders || []);
+        const [ordersRes, subscriptionsRes] = await Promise.all([
+          ordersAPI.getMyOrders(),
+          subscriptionsAPI.getMySubscriptions()
+        ]);
+        setOrders(ordersRes.data.orders || []);
+        setSubscriptions(subscriptionsRes.data.subscriptions || []);
       } catch (error) {
-        console.error('Error fetching orders:', error);
+        console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
     };
-    fetchOrders();
+    fetchData();
   }, [isAuthenticated, navigate]);
 
   const handleLogout = () => {
@@ -80,6 +85,17 @@ const Profile = () => {
                 >
                   <ShoppingBag className="h-5 w-5" />
                   <span>My Orders</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('subscriptions')}
+                  className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+                    activeTab === 'subscriptions'
+                      ? 'bg-forest-50 text-forest-700'
+                      : 'text-earth-600 hover:bg-earth-50'
+                  }`}
+                >
+                  <RefreshCw className="h-5 w-5" />
+                  <span>My Subscriptions</span>
                 </button>
                 <button
                   onClick={() => setActiveTab('profile')}
@@ -180,6 +196,91 @@ const Profile = () => {
                           </span>
                           <span className="font-semibold text-earth-900">
                             ₹{order.total}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {activeTab === 'subscriptions' && (
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-display font-semibold text-earth-900">
+                    My Subscriptions
+                  </h2>
+                  <button
+                    onClick={() => navigate('/subscriptions')}
+                    className="btn-primary"
+                  >
+                    Create New Subscription
+                  </button>
+                </div>
+
+                {loading ? (
+                  <div className="flex items-center justify-center py-12">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-forest-600"></div>
+                  </div>
+                ) : subscriptions.length === 0 ? (
+                  <div className="card p-12 text-center">
+                    <RefreshCw className="h-16 w-16 text-earth-300 mx-auto mb-4" />
+                    <h3 className="text-lg font-semibold text-earth-900 mb-2">
+                      No subscriptions yet
+                    </h3>
+                    <p className="text-earth-600 mb-6">
+                      Subscribe to get fresh mushrooms delivered weekly
+                    </p>
+                    <button
+                      onClick={() => navigate('/subscriptions')}
+                      className="btn-primary"
+                    >
+                      Browse Subscription Plans
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {subscriptions.map((subscription) => (
+                      <div key={subscription._id} className="card p-6">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                          <div>
+                            <p className="font-semibold text-earth-900">
+                              Subscription #{subscription.subscriptionNumber}
+                            </p>
+                            <p className="text-sm text-earth-600">
+                              {new Date(subscription.createdAt).toLocaleDateString()}
+                            </p>
+                          </div>
+                          <span className={`px-3 py-1 rounded-full text-xs font-medium capitalize mt-2 md:mt-0 inline-block ${
+                            subscription.status === 'active' ? 'bg-green-100 text-green-700' :
+                            subscription.status === 'paused' ? 'bg-yellow-100 text-yellow-700' :
+                            subscription.status === 'cancelled' ? 'bg-red-100 text-red-700' :
+                            'bg-earth-100 text-earth-700'
+                          }`}>
+                            {subscription.status}
+                          </span>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {subscription.items.map((item, index) => (
+                            <span
+                              key={index}
+                              className="inline-flex items-center gap-1 bg-forest-50 text-earth-700 px-3 py-1 rounded-full text-sm"
+                            >
+                              <Package className="h-4 w-4" />
+                              {item.name} x {item.quantity}
+                            </span>
+                          ))}
+                        </div>
+
+                        <div className="flex items-center justify-between pt-4 border-t border-earth-100">
+                          <div className="flex gap-6 text-sm text-earth-600">
+                            <span>{subscription.deliveryFrequency}</span>
+                            <span>{subscription.deliveryDay}</span>
+                          </div>
+                          <span className="font-semibold text-earth-900">
+                            ₹{subscription.total}/{subscription.deliveryFrequency === 'weekly' ? 'week' : subscription.deliveryFrequency === 'bi-weekly' ? '2 weeks' : 'month'}
                           </span>
                         </div>
                       </div>

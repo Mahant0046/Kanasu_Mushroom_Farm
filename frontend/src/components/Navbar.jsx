@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ShoppingBag, User, Leaf } from 'lucide-react';
+import { Menu, X, ShoppingBag, User, Facebook, Instagram, Twitter, MessageCircle } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 
@@ -13,6 +13,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Shop', path: '/shop' },
+    { name: 'Subscriptions', path: '/subscriptions' },
     { name: 'About', path: '/about' },
     { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' },
@@ -22,33 +23,34 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50 border-b border-earth-100">
-      <div className="container">
-        <div className="flex items-center justify-between h-20">
+      {/* Side Stripe */}
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-forest-400 via-forest-500 to-forest-600"></div>
+      <div className="container pl-4">
+        <div className="flex items-center justify-between h-28">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
-            <div className="bg-forest-600 text-white p-2 rounded-lg group-hover:bg-forest-700 transition-colors">
-              <Leaf className="h-6 w-6" />
-            </div>
-            <div>
-              <span className="text-2xl font-display font-bold text-earth-900 block leading-tight">
-                Kanasu
-              </span>
-              <span className="text-xs text-earth-500 font-medium tracking-wide uppercase">
-                Mushroom Farm
-              </span>
+          <Link to="/" className="flex items-center group">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-forest-400 to-forest-600 rounded-full blur-xl opacity-75 group-hover:opacity-95 transition-opacity duration-300 scale-110"></div>
+              <div className="relative bg-gradient-to-br from-forest-50 to-white p-3 mt-4 rounded-full shadow-xl group-hover:shadow-2xl transition-all duration-500 border-2 border-forest-400 group-hover:border-forest-500">
+                <img 
+                  src="/cropped_circle_logo.png" 
+                  alt="Kanasu Mushroom Farm" 
+                  className="h-24 w-25 object-cover rounded-full" 
+                />
+              </div>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
+          <div className="hidden lg:flex items-center space-x-2">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                className={`px-5 py-3 rounded-lg text-base font-semibold transition-colors ${
                   isActive(link.path)
                     ? 'bg-forest-100 text-forest-700'
-                    : 'text-earth-600 hover:bg-earth-50 hover:text-forest-600'
+                    : 'text-earth-700 hover:bg-earth-50 hover:text-earth-900'
                 }`}
               >
                 {link.name}
@@ -58,6 +60,34 @@ const Navbar = () => {
 
           {/* Right side icons */}
           <div className="hidden md:flex items-center space-x-3">
+            {/* Social Media Links */}
+            <div className="flex items-center space-x-2 pr-4 border-r border-earth-200">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 text-earth-600 hover:text-forest-600 hover:bg-earth-50 rounded-lg transition-colors group"
+              >
+                <Facebook className="h-5 w-5 group-hover:scale-110 transition-transform" />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 text-earth-600 hover:text-forest-600 hover:bg-earth-50 rounded-lg transition-colors group"
+              >
+                <Instagram className="h-5 w-5 group-hover:scale-110 transition-transform" />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 text-earth-600 hover:text-forest-600 hover:bg-earth-50 rounded-lg transition-colors group"
+              >
+                <Twitter className="h-5 w-5 group-hover:scale-110 transition-transform" />
+              </a>
+            </div>
+
             <button
               onClick={() => setIsCartOpen(true)}
               className="relative p-3 text-earth-600 hover:text-forest-600 hover:bg-earth-50 rounded-lg transition-colors"
@@ -115,6 +145,34 @@ const Navbar = () => {
                 </Link>
               ))}
               <div className="flex items-center space-x-3 pt-4 border-t border-earth-200">
+                {/* Social Media Links Mobile */}
+                <div className="flex items-center space-x-2">
+                  <a
+                    href="https://facebook.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 bg-white rounded-lg text-earth-600 shadow-sm hover:text-forest-600 transition-colors"
+                  >
+                    <Facebook className="h-5 w-5" />
+                  </a>
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 bg-white rounded-lg text-earth-600 shadow-sm hover:text-forest-600 transition-colors"
+                  >
+                    <Instagram className="h-5 w-5" />
+                  </a>
+                  <a
+                    href="https://twitter.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 bg-white rounded-lg text-earth-600 shadow-sm hover:text-forest-600 transition-colors"
+                  >
+                    <Twitter className="h-5 w-5" />
+                  </a>
+                </div>
+
                 <button
                   onClick={() => {
                     setIsCartOpen(true);

@@ -67,87 +67,102 @@ const Contact = () => {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-forest-600 to-earth-700 text-white py-20">
-        <div className="container">
-          <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">
-            Contact Us
-          </h1>
-          <p className="text-lg text-forest-100 max-w-2xl">
-            Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
-          </p>
+      <section className="relative bg-gradient-to-br from-forest-600 via-forest-700 to-earth-700 text-white py-20 overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <img
+            src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=1920&q=80"
+            alt="Mushroom Farm"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="container relative z-10">
+          <div className="max-w-4xl">
+            <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 leading-tight">
+              Contact Us
+            </h1>
+            <p className="text-lg text-forest-100 max-w-2xl leading-relaxed">
+              Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            </p>
+          </div>
         </div>
       </section>
 
-      <div className="py-16">
+      <div className="py-20">
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Contact Info */}
             <div>
-              <h2 className="text-2xl font-display font-semibold text-earth-900 mb-6">
+              <h2 className="text-3xl font-display font-semibold text-earth-900 mb-8">
                 Get in Touch
               </h2>
               
               <div className="space-y-6 mb-12">
-                <div className="flex items-start space-x-4">
-                  <div className="text-forest-600 mt-1">
-                    <MapPin className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-earth-900 mb-1">Address</h3>
-                    <p className="text-earth-600">
-                      Farm Road<br />
-                      Bangalore, Karnataka<br />
-                      India 560001
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="text-forest-600 mt-1">
-                    <Phone className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-earth-900 mb-1">Phone</h3>
-                    <p className="text-earth-600">+91 98765 43210</p>
-                    <p className="text-earth-600">Mon-Sat, 9am-6pm</p>
+                <div className="group bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-forest-100 hover:border-forest-300">
+                  <div className="flex items-start space-x-4">
+                    <div className="bg-gradient-to-br from-forest-400 to-forest-600 p-3 rounded-xl text-white mt-1 group-hover:scale-110 transition-transform duration-300">
+                      <MapPin className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-earth-900 mb-2 text-lg">Address</h3>
+                      <p className="text-earth-600 leading-relaxed">
+                        Farm Road<br />
+                        Bangalore, Karnataka<br />
+                        India 560001
+                      </p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="text-forest-600 mt-1">
-                    <Mail className="h-6 w-6" />
+                <div className="group bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-forest-100 hover:border-forest-300">
+                  <div className="flex items-start space-x-4">
+                    <div className="bg-gradient-to-br from-forest-400 to-forest-600 p-3 rounded-xl text-white mt-1 group-hover:scale-110 transition-transform duration-300">
+                      <Phone className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-earth-900 mb-2 text-lg">Phone</h3>
+                      <p className="text-earth-600 leading-relaxed">+91 98765 43210</p>
+                      <p className="text-earth-600 text-sm">Mon-Sat, 9am-6pm</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-earth-900 mb-1">Email</h3>
-                    <p className="text-earth-600">hello@kanasu.com</p>
-                    <p className="text-earth-600">support@kanasu.com</p>
+                </div>
+
+                <div className="group bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-forest-100 hover:border-forest-300">
+                  <div className="flex items-start space-x-4">
+                    <div className="bg-gradient-to-br from-forest-400 to-forest-600 p-3 rounded-xl text-white mt-1 group-hover:scale-110 transition-transform duration-300">
+                      <Mail className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-earth-900 mb-2 text-lg">Email</h3>
+                      <p className="text-earth-600 leading-relaxed">hello@kanasu.com</p>
+                      <p className="text-earth-600 text-sm">support@kanasu.com</p>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Newsletter */}
-              <div className="card p-6">
-                <h3 className="font-semibold text-earth-900 mb-2">
+              <div className="bg-gradient-to-br from-forest-50 to-white p-8 rounded-2xl shadow-lg border border-forest-200">
+                <h3 className="font-semibold text-earth-900 mb-3 text-xl">
                   Subscribe to Our Newsletter
                 </h3>
-                <p className="text-earth-600 text-sm mb-4">
+                <p className="text-earth-600 mb-6 leading-relaxed">
                   Get updates on new products, recipes, and special offers.
                 </p>
                 {newsletterSubmitted ? (
-                  <div className="text-forest-600 text-sm">
+                  <div className="bg-forest-100 text-forest-700 px-4 py-3 rounded-lg font-medium">
                     ✓ Subscribed successfully!
                   </div>
                 ) : (
-                  <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
+                  <form onSubmit={handleNewsletterSubmit} className="flex gap-3">
                     <input
                       type="email"
                       placeholder="Enter your email"
                       value={newsletterEmail}
                       onChange={(e) => setNewsletterEmail(e.target.value)}
                       required
-                      className="input flex-1"
+                      className="input flex-1 px-4 py-3"
                     />
-                    <button type="submit" className="btn-primary px-4">
+                    <button type="submit" className="btn-primary px-6 py-3">
                       <Send className="h-5 w-5" />
                     </button>
                   </form>
@@ -156,8 +171,8 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="card p-8">
-              <h2 className="text-2xl font-display font-semibold text-earth-900 mb-6">
+            <div className="bg-white p-8 rounded-2xl shadow-xl border border-forest-100">
+              <h2 className="text-3xl font-display font-semibold text-earth-900 mb-8">
                 Send us a Message
               </h2>
               
@@ -172,7 +187,7 @@ const Contact = () => {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="input"
+                      className="input px-4 py-3 border-2 border-earth-200 focus:border-forest-500 focus:ring-2 focus:ring-forest-200 transition-all duration-300 rounded-lg"
                       placeholder="Your name"
                     />
                   </div>
@@ -185,7 +200,7 @@ const Contact = () => {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="input"
+                      className="input px-4 py-3 border-2 border-earth-200 focus:border-forest-500 focus:ring-2 focus:ring-forest-200 transition-all duration-300 rounded-lg"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -199,7 +214,7 @@ const Contact = () => {
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="input"
+                    className="input px-4 py-3 border-2 border-earth-200 focus:border-forest-500 focus:ring-2 focus:ring-forest-200 transition-all duration-300 rounded-lg"
                     placeholder="+91 98765 43210"
                   />
                 </div>
@@ -213,7 +228,7 @@ const Contact = () => {
                     required
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="input"
+                    className="input px-4 py-3 border-2 border-earth-200 focus:border-forest-500 focus:ring-2 focus:ring-forest-200 transition-all duration-300 rounded-lg"
                     placeholder="How can we help?"
                   />
                 </div>
@@ -227,7 +242,7 @@ const Contact = () => {
                     rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="input"
+                    className="input px-4 py-3 border-2 border-earth-200 focus:border-forest-500 focus:ring-2 focus:ring-forest-200 transition-all duration-300 rounded-lg resize-none"
                     placeholder="Tell us more about your inquiry..."
                   />
                 </div>
@@ -235,7 +250,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full btn-primary flex items-center justify-center disabled:opacity-50"
+                  className="w-full btn-primary px-8 py-4 text-lg font-semibold flex items-center justify-center disabled:opacity-50 hover:shadow-lg transition-shadow duration-300 rounded-xl"
                 >
                   {submitting ? 'Sending...' : 'Send Message'}
                   <Send className="h-5 w-5 ml-2" />
@@ -247,17 +262,25 @@ const Contact = () => {
       </div>
 
       {/* Map Section */}
-      <section className="bg-earth-100 py-16">
+      <section className="bg-gradient-to-b from-forest-50 to-white py-20">
         <div className="container">
-          <div className="card p-8 aspect-video flex items-center justify-center bg-earth-200">
-            <div className="text-center">
-              <MapPin className="h-16 w-16 text-earth-400 mx-auto mb-4" />
-              <p className="text-earth-600">Map integration would go here</p>
-              <p className="text-earth-500 text-sm">Bangalore, Karnataka, India</p>
-            </div>
+          <div className="text-center mb-12">
+            <h2 className="section-title text-4xl mb-4">Find Us</h2>
+            <p className="section-subtitle text-xl">Visit our farm and experience fresh mushrooms</p>
+          </div>
+          <div className="card p-2 rounded-3xl overflow-hidden shadow-2xl border border-forest-200">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15382.715597460432!2d74.98187829978579!3d15.447872512320235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb8cd70176844d5%3A0xd64403c1b8785e27!2sKarnatak%20Arts%20College%20Dharwad!5e0!3m2!1sen!2sin!4v1776239129388!5m2!1sen!2sin"
+              className="w-full h-96 md:h-[500px] rounded-2xl border-0"
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Store Location"
+            ></iframe>
           </div>
         </div>
       </section>
+
     </div>
   );
 };

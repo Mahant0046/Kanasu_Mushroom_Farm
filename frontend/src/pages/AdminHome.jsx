@@ -6,6 +6,7 @@ import {
   ShoppingCart, 
   MessageSquare, 
   RefreshCw,
+  FileText,
   ArrowRight,
   TrendingUp,
   Users,
@@ -61,6 +62,14 @@ const AdminHome = () => {
       path: '/admin/subscriptions',
       color: 'bg-orange-100 text-orange-700',
       stats: ['Active', 'Paused', 'Cancelled']
+    },
+    {
+      title: 'Blog Management',
+      description: 'Create and manage blog posts, articles, and content',
+      icon: FileText,
+      path: '/admin/blogs',
+      color: 'bg-teal-100 text-teal-700',
+      stats: ['Posts', 'Published', 'Drafts']
     }
   ];
 

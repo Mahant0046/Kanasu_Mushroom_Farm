@@ -10,7 +10,12 @@ exports.getBlogs = async (req, res, next) => {
     const skip = (page - 1) * limit;
 
     // Build query
-    const query = { published: true };
+    const query = {};
+
+    // Include inactive blogs for admin
+    if (!req.query.includeInactive) {
+      query.published = true;
+    }
 
     // Filter by category
     if (req.query.category) {
@@ -36,6 +41,29 @@ exports.getBlogs = async (req, res, next) => {
       page,
       pages: Math.ceil(total / limit),
       blogs
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Get single blog by ID
+// @route   GET /api/blog/:id
+// @access  Private/Admin
+exports.getBlogById = async (req, res, next) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+
+    if (!blog) {
+      return res.status(404).json({
+        success: false,
+        message: 'Blog not found'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      blog
     });
   } catch (error) {
     next(error);

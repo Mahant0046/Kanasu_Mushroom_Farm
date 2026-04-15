@@ -152,8 +152,8 @@ exports.updateSubscription = async (req, res, next) => {
       });
     }
 
-    // Check ownership
-    if (subscription.user.toString() !== req.user.id) {
+    // Check ownership (or admin)
+    if (subscription.user.toString() !== req.user.id && req.user.role !== 'admin') {
       return res.status(403).json({
         success: false,
         message: 'Not authorized to update this subscription'
@@ -224,8 +224,8 @@ exports.pauseSubscription = async (req, res, next) => {
       });
     }
 
-    // Check ownership
-    if (subscription.user.toString() !== req.user.id) {
+    // Check ownership (or admin)
+    if (subscription.user.toString() !== req.user.id && req.user.role !== 'admin') {
       return res.status(403).json({
         success: false,
         message: 'Not authorized to pause this subscription'
@@ -265,8 +265,8 @@ exports.resumeSubscription = async (req, res, next) => {
       });
     }
 
-    // Check ownership
-    if (subscription.user.toString() !== req.user.id) {
+    // Check ownership (or admin)
+    if (subscription.user.toString() !== req.user.id && req.user.role !== 'admin') {
       return res.status(403).json({
         success: false,
         message: 'Not authorized to resume this subscription'
@@ -319,8 +319,8 @@ exports.cancelSubscription = async (req, res, next) => {
       });
     }
 
-    // Check ownership
-    if (subscription.user.toString() !== req.user.id) {
+    // Check ownership (or admin)
+    if (subscription.user.toString() !== req.user.id && req.user.role !== 'admin') {
       return res.status(403).json({
         success: false,
         message: 'Not authorized to cancel this subscription'

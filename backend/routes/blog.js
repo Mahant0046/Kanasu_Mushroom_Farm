@@ -5,6 +5,7 @@ const { upload, uploadMultiple } = require('../middleware/upload');
 const {
   getBlogs,
   getBlog,
+  getBlogById,
   createBlog,
   updateBlog,
   deleteBlog,
@@ -23,14 +24,16 @@ router.route('/categories')
 router.route('/featured')
   .get(getFeaturedBlogs);
 
-router.route('/:slug')
-  .get(getBlog);
-
+// ID routes must come before slug routes to avoid conflicts
 router.route('/:id')
+  .get(getBlogById)
   .put(protect, authorize('admin'), uploadMultiple('images', 5), updateBlog)
   .delete(protect, authorize('admin'), deleteBlog);
 
 router.route('/:id/comments')
   .post(protect, addComment);
+
+router.route('/:slug')
+  .get(getBlog);
 
 module.exports = router;

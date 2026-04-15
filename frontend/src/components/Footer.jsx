@@ -1,31 +1,51 @@
 import { Link } from 'react-router-dom';
-import { Leaf, Mail, Phone, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
+import { Leaf, Mail, Phone, MapPin, Facebook, Instagram, Twitter, MessageCircle } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-earth-900 text-earth-100">
+    <footer className="bg-earth-800 text-earth-100">
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <Leaf className="h-8 w-8 text-forest-400" />
-              <span className="text-xl font-display font-semibold text-white">
-                Kanasu
-              </span>
-            </div>
+              <img src="/cropped_circle_logo.png" alt="" className='h-20 w-20' />
+             </div>
             <p className="text-earth-300 text-sm">
               Nature's finest mushrooms, farm to your door. Fresh, organic, and sustainably grown.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-earth-300 hover:text-white transition-colors">
-                <Facebook className="h-5 w-5" />
+            <div className="flex space-x-3">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-earth-700 p-3 rounded-lg text-earth-300 hover:text-white hover:bg-forest-600 transition-all duration-300 group"
+              >
+                <Facebook className="h-5 w-5 group-hover:scale-110 transition-transform" />
               </a>
-              <a href="#" className="text-earth-300 hover:text-white transition-colors">
-                <Instagram className="h-5 w-5" />
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-earth-700 p-3 rounded-lg text-earth-300 hover:text-white hover:bg-forest-600 transition-all duration-300 group"
+              >
+                <Instagram className="h-5 w-5 group-hover:scale-110 transition-transform" />
               </a>
-              <a href="#" className="text-earth-300 hover:text-white transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-earth-700 p-3 rounded-lg text-earth-300 hover:text-white hover:bg-forest-600 transition-all duration-300 group"
+              >
+                <Twitter className="h-5 w-5 group-hover:scale-110 transition-transform" />
+              </a>
+              <a
+                href="https://wa.me/919876543210"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-earth-700 p-3 rounded-lg text-earth-300 hover:text-white hover:bg-green-600 transition-all duration-300 group"
+              >
+                <MessageCircle className="h-5 w-5 group-hover:scale-110 transition-transform" />
               </a>
             </div>
           </div>

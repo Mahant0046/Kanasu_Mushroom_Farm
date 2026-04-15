@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import CartSidebar from './components/CartSidebar'
+import WhatsAppFloat from './components/WhatsAppFloat'
 import Home from './pages/Home'
 import Shop from './pages/Shop'
 import About from './pages/About'
@@ -15,6 +16,9 @@ import Checkout from './pages/Checkout'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
+import Subscriptions from './pages/Subscriptions'
+import MySubscriptions from './pages/MySubscriptions'
+import SubscriptionCheckout from './pages/SubscriptionCheckout'
 import AdminDashboard from './pages/AdminDashboard'
 import AdminReviews from './pages/AdminReviews'
 import AdminSubscriptions from './pages/AdminSubscriptions'
@@ -27,7 +31,10 @@ import AdminOrderDetail from './pages/AdminOrderDetail'
 import AdminReviewDetail from './pages/AdminReviewDetail'
 import AdminProductDetail from './pages/AdminProductDetail'
 import AdminSubscriptionDetail from './pages/AdminSubscriptionDetail'
+import AdminBlogs from './pages/AdminBlogs'
+import AdminBlogDetail from './pages/AdminBlogDetail'
 import ProductForm from './components/admin/ProductForm'
+import BlogForm from './components/admin/BlogForm'
 import AdminLayout from './components/admin/AdminLayout'
 
 function App() {
@@ -51,6 +58,10 @@ function App() {
               <Route path="reviews/:id" element={<AdminReviewDetail />} />
               <Route path="subscriptions" element={<AdminSubscriptions />} />
               <Route path="subscriptions/:id" element={<AdminSubscriptionDetail />} />
+              <Route path="blogs" element={<AdminBlogs />} />
+              <Route path="blogs/new" element={<BlogForm />} />
+              <Route path="blogs/:id/edit" element={<BlogForm />} />
+              <Route path="blogs/:id" element={<AdminBlogDetail />} />
               <Route path="farm" element={<FarmDashboard />} />
             </Route>
 
@@ -64,6 +75,7 @@ function App() {
                   </main>
                   <Footer />
                   <CartSidebar />
+                  <WhatsAppFloat />
                 </>
               }
             >
@@ -80,6 +92,9 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/subscriptions" element={<Subscriptions />} />
+              <Route path="/my-subscriptions" element={<MySubscriptions />} />
+              <Route path="/subscription-checkout" element={<SubscriptionCheckout />} />
             </Route>
           </Routes>
         </Router>

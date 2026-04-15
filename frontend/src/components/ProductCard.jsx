@@ -11,7 +11,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <Link to={`/shop/${product.slug}`} className="block group">
+    <Link to={`/product/${product.slug}`} className="block group">
       <div className="card overflow-hidden">
         <div className="relative aspect-square bg-earth-50 overflow-hidden">
           {product.thumbnail ? (

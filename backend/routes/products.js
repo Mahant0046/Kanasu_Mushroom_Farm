@@ -19,13 +19,13 @@ router.route('/')
 router.route('/featured')
   .get(getFeaturedProducts);
 
+router.route('/:slug')
+  .get(getProduct);
+
 router.route('/:id')
   .get(protect, authorize('admin'), getProduct)
   .put(protect, authorize('admin'), uploadMultiple('images', 5), updateProduct)
   .delete(protect, authorize('admin'), deleteProduct);
-
-router.route('/:slug')
-  .get(getProduct);
 
 router.patch('/:id/stock', protect, authorize('admin'), updateStock);
 

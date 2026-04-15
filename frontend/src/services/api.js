@@ -9,6 +9,13 @@ const api = axios.create({
   },
 });
 
+// Retry configuration
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 1000; // Initial delay in ms
+
+// Helper function for delay
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 // Add token to requests
 api.interceptors.request.use(
   (config) => {
@@ -19,6 +26,30 @@ api.interceptors.request.use(
     return config;
   },
   (error) => Promise.reject(error)
+);
+
+// Add retry logic for 429 errors
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    
+    // Retry on 429 (Too Many Requests) errors
+    if (error.response?.status === 429 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      originalRequest._retryCount = (originalRequest._retryCount || 0) + 1;
+      
+      if (originalRequest._retryCount <= MAX_RETRIES) {
+        // Exponential backoff: 1s, 2s, 4s
+        const retryDelay = RETRY_DELAY * Math.pow(2, originalRequest._retryCount - 1);
+        console.log(`Retrying request after ${retryDelay}ms (attempt ${originalRequest._retryCount}/${MAX_RETRIES})`);
+        await delay(retryDelay);
+        return api(originalRequest);
+      }
+    }
+    
+    return Promise.reject(error);
+  }
 );
 
 // Auth API
@@ -85,6 +116,7 @@ export const subscriptionsAPI = {
 // Blog API
 export const blogAPI = {
   getAll: (params) => api.get('/blog', { params }),
+  getById: (id) => api.get(`/blog/${id}`),
   getBySlug: (slug) => api.get(`/blog/${slug}`),
   getCategories: () => api.get('/blog/categories'),
   getFeatured: () => api.get('/blog/featured'),

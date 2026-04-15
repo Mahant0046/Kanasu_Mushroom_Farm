@@ -141,17 +141,30 @@ const Blog = () => {
 
   // Blog listing view
   return (
-    <div className="py-8">
-      <div className="container">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-display font-semibold text-earth-900 mb-4">
-            Our Blog
-          </h1>
-          <p className="text-earth-600 max-w-2xl mx-auto">
-            Discover recipes, health benefits, growing guides, and everything about mushrooms
-          </p>
+    <div>
+      {/* Hero */}
+      <section className="relative bg-gradient-to-br from-forest-600 via-forest-700 to-earth-700 text-white py-20 overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <img
+            src="https://images.unsplash.com/photo-1635322966219-b75ed372eb01?w=1920&q=80"
+            alt="Mushroom Blog"
+            className="w-full h-full object-cover"
+          />
         </div>
+        <div className="container relative z-10">
+          <div className="max-w-4xl">
+            <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 leading-tight">
+              Our Blog
+            </h1>
+            <p className="text-lg text-forest-100 max-w-2xl leading-relaxed">
+              Discover recipes, health benefits, growing guides, and everything about mushrooms
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="py-8">
+        <div className="container">
 
         {/* Category Filter */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
@@ -233,6 +246,7 @@ const Blog = () => {
             ))}
           </div>
         )}
+        </div>
       </div>
     </div>
   );

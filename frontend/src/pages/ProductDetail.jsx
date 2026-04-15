@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ShoppingCart, Star, Plus, Minus, Truck, Shield, Leaf } from 'lucide-react';
+import { ShoppingCart, Star, Plus, Minus, Truck, Shield, Leaf, LeafyGreen, LeafyGreenIcon } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { productsAPI, reviewsAPI } from '../services/api';
 
@@ -200,7 +200,7 @@ const ProductDetail = () => {
                 <p className="text-xs text-earth-600">Quality Assured</p>
               </div>
               <div className="text-center p-4 bg-earth-50 rounded-lg">
-                <Leaf className="h-6 w-6 text-forest-600 mx-auto mb-2" />
+                <Leaf className="h-6 w-6 text-forest-600 mx-auto mb-2" />  
                 <p className="text-xs text-earth-600">100% Organic</p>
               </div>
             </div>
